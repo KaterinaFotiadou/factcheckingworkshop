@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #F1EFE8;
+    color: #2C2C2A;
+    width: 360px;
+    padding: 16px;
+    margin: 0;
+  }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .subtitle { color: #5F5E5A; font-size: 12px; margin-bottom: 14px; }
+  .input-row { display: flex; gap: 6px; margin-bottom: 10px; }
+  input[type=text] {
+    flex: 1; padding: 9px 12px; border-radius: 20px;
+    border: 1px solid #B4B2A9; font-size: 13px; outline: none;
+  }
+  input[type=text]:focus { border-color: #534AB7; }
+  button {
+    padding: 9px 16px; border-radius: 20px; border: none;
+    background: #534AB7; color: white; font-size: 13px; font-weight: 500;
+    cursor: pointer;
+  }
+  button:hover { background: #3C3489; }
+  .examples { font-size: 11px; color: #5F5E5A; margin-bottom: 14px; }
+  .examples button.chip {
+    background: white; color: #444441; border: 1px solid #D3D1C7;
+    padding: 4px 10px; border-radius: 14px; font-size: 11px;
+    margin: 4px 4px 0 0; cursor: pointer;
+  }
+  #result { display: none; }
+  .verdict-banner {
+    padding: 10px 14px; border-radius: 10px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 12px;
+  }
+  .verdict-agree { background: #E1F5EE; color: #085041; }
+  .verdict-disagree { background: #FCEBEB; color: #791F1F; }
+  .verdict-mixed { background: #FAEEDA; color: #633806; }
+
+  .sources { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; }
+  .source-card {
+    background: white; border: 1px solid #D3D1C7; border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .source-card .name { font-weight: 500; font-size: 12px; margin-bottom: 3px; }
+  .source-card .stance {
+    display: inline-block; font-size: 10px; font-weight: 500;
+    padding: 1px 7px; border-radius: 8px; margin-bottom: 4px;
+  }
+  .stance-refutes { background: #FCEBEB; color: #791F1F; }
+  .stance-confirms { background: #E1F5EE; color: #085041; }
+  .stance-partial { background: #FAEEDA; color: #633806; }
+  .source-card .snippet { font-size: 11px; color: #444441; line-height: 1.4; }
+
+  .loading { color: #5F5E5A; font-size: 12px; padding: 10px 0; display: none; }
+</style>
+</head>
+<body>
+
+<h1>Multi-Source Verification</h1>
+<div class="subtitle">Prototype — checks claims against multiple sources</div>
+
+<div class="input-row">
+  <input type="text" id="claimInput" placeholder="Enter a claim…">
+  <button id="checkBtn">Check</button>
+</div>
+<div class="examples">
+  <button class="chip" data-claim="Coffee causes cancer">Coffee & Cancer</button>
+  <button class="chip" data-claim="5G causes COVID symptoms">5G & COVID</button>
+  <button class="chip" data-claim="Vaccines contain microchips">Vaccines</button>
+</div>
+
+<div class="loading" id="loading">Comparing sources…</div>
+<div id="result">
+  <div class="verdict-banner" id="verdictBanner"></div>
+  <div class="sources" id="sourcesList"></div>
+</div>
+
+<script src="database.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

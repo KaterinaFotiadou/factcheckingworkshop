@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Multi-Source Verification",
+  "version": "1.0",
+  "description": "Checks a claim against multiple independent sources",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["auto-check.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
